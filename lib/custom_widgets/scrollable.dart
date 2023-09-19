@@ -26,24 +26,17 @@ class ScrollableComponent extends Widget {
     // Clip the canvas to the scrollable area
     canvas.clipRect(scrollableRect);
 
+    if (AppConstants().scrollPosition < 0) {
+      AppConstants().scrollPosition = 0;
+    }
     // Translate the canvas by the scroll position
     canvas.translate(0, -AppConstants().scrollPosition);
-    print(AppConstants().scrollPosition);
 
     drawChildren();
 
     // Reset the canvas translation
     canvas.translate(0, AppConstants().scrollPosition);
   }
-
-  // void handleScroll(double deltaY) {
-  //   // Update the scroll position based on user input
-  //   scrollPosition += deltaY;
-  //
-  //   // Clamp the scroll position to stay within bounds
-  //   // You can adjust the bounds based on your content size
-  //   // scrollPosition = scrollPosition.clamp(0, 500);
-  // }
 
   @override
   void hitTest() {
